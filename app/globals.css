@@ -1,0 +1,124 @@
+/* Base reset and variables */
+:root {
+  --bg1: 255, 119, 119;   /* coral */
+  --bg2: 99, 102, 241;    /* indigo */
+  --bg3: 56, 189, 248;    /* sky */
+  --glass: 255, 255, 255; /* white */
+  --text: 248, 250, 252;  /* slate-50 */
+  --muted: 203, 213, 225; /* slate-300 */
+  --ring: 255, 255, 255;  /* ring color */
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; font-family: ui-sans-serif, system-ui, sans-serif; color: rgb(var(--text)); }
+
+/* Animated gradient background */
+.site-bg {
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 800px at 90% -10%, rgba(var(--bg2), 0.25), transparent 60%),
+    radial-gradient(1100px 700px at -10% 10%, rgba(var(--bg3), 0.25), transparent 60%),
+    linear-gradient(135deg, rgba(var(--bg1), 0.35), rgba(var(--bg2), 0.35));
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Subtle floating particles */
+.site-bg::before {
+  content: "";
+  position: fixed;
+  inset: -10% -10% -10% -10%;
+  background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+  pointer-events: none;
+}
+
+.container {
+  width: min(1100px, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.section { padding: 4rem 0; }
+.section-title { font-size: clamp(1.25rem, 2vw + 1rem, 2rem); margin: 0 0 1.25rem; letter-spacing: 0.2px; }
+
+/* Glass primitive */
+.glass {
+  background: rgba(var(--glass), 0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  border-radius: 16px;
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+}
+
+/* Hero */
+.hero { padding-top: clamp(3rem, 8vh, 6rem); }
+.hero .hero-content {
+  padding: clamp(1rem, 2vw + 1rem, 2rem);
+  text-align: center;
+}
+.hero h1 { font-size: clamp(2rem, 4vw + 1rem, 3rem); margin: 0 0 0.75rem; }
+.hero p { color: rgb(var(--muted)); margin: 0 auto 1.25rem; max-width: 60ch; }
+
+.hero-actions { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.65rem 1rem; border-radius: 999px; text-decoration: none;
+  color: rgb(var(--text)); border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.06);
+}
+.btn.primary {
+  background: linear-gradient(135deg, rgba(var(--bg2),0.9), rgba(var(--bg3),0.9));
+  border: none;
+}
+.btn:hover { filter: brightness(1.05); }
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+}
+
+/* Cards span */
+.grid > * { grid-column: span 12; }
+@media (min-width: 640px) { .grid > * { grid-column: span 6; } }
+@media (min-width: 1024px) { .grid > * { grid-column: span 4; } }
+
+/* Forms */
+.form { padding: 1rem; }
+.form-row { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+@media (min-width: 640px) { .form-row { grid-template-columns: repeat(2, 1fr); } }
+
+.form input, .form textarea {
+  width: 100%;
+  padding: 0.85rem 0.9rem;
+  color: rgb(var(--text));
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 12px;
+  outline: none;
+}
+.form input:focus, .form textarea:focus { box-shadow: 0 0 0 3px rgba(var(--ring), 0.2); }
+.form-actions { margin-top: 0.75rem; display: flex; justify-content: flex-end; }
+
+/* Navbar */
+.navbar {
+  position: sticky; top: 0; z-index: 50; backdrop-filter: blur(8px);
+}
+.nav-inner {
+  margin-top: 1rem; padding: 0.5rem 0.75rem; display: flex; align-items: center; justify-content: space-between;
+}
+.brand { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 700; letter-spacing: 0.3px; }
+.nav-links { display: flex; gap: 0.5rem; }
+
+/* Footer */
+.footer { margin: 3rem 0 2rem; padding: 0.75rem; text-align: center; color: rgba(255,255,255,0.85); }
+.footer a { color: inherit; }
+
+/* Card */
+.card { padding: 1rem; }
+.card h3 { margin: 0 0 0.25rem; font-size: 1.1rem; }
+.card p { margin: 0; color: rgb(var(--muted)); }
